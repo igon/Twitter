@@ -83,7 +83,7 @@ class DetailTweetViewController: UIViewController {
 
             let composeTweetViewController = segue.destinationViewController as! ComposeTweetViewController
             composeTweetViewController.tweet = curTweet
-        }
+        } 
     }
     
 }

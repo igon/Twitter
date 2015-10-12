@@ -48,7 +48,7 @@ class Tweet: NSObject {
         return tweets
     }
     
-    func populateCell(tableView: UITableView) -> TweetTableViewCell {
+    func populateCell(row: Int, tableView: UITableView) -> TweetTableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetTableViewCell
         
         cell.favoriteButton.backgroundColor = UIColor.clearColor()
@@ -92,8 +92,16 @@ class Tweet: NSObject {
         cell.tweetBodyLabel.text = text
         
         cell.profileImageView.setImageWithURL(NSURL(string: user!.profileImageUrl!))
+        cell.profileImageView.tag = row
+        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: "onTap:")
+//        tapGesture.numberOfTouchesRequired = 1
+//        tapGesture.numberOfTapsRequired = 1
+//        cell.profileImageView.addGestureRecognizer(tapGesture)
         
         
         return cell
     }
+    
+
 }

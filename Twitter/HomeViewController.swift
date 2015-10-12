@@ -50,10 +50,25 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tweets![indexPath.row].populateCell(tableView)
+        let cell = tweets![indexPath.row].populateCell(indexPath.row, tableView: tableView)
+        let tapGesture = UITapGestureRecognizer(target: self, action: "onTap:")
+        tapGesture.numberOfTouchesRequired = 1
+        tapGesture.numberOfTapsRequired = 1
+        cell.profileImageView.addGestureRecognizer(tapGesture)
+        
         return cell
     }
     
+    func onTap(sender: AnyObject) {
+        
+        let tapView = sender.view as? UIImageView
+        
+        if tapView != nil {
+            rowSelected = tapView!.tag
+            self.performSegueWithIdentifier("ProfileSegue", sender: self)
+        }
+    }
+
     func loadTweets() {
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
             if tweets != nil {
@@ -82,7 +97,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         rowSelected = indexPath.row
         self.performSegueWithIdentifier("tweetDetail", sender: self)
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+  //      tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     
@@ -90,6 +105,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
      User.currentUser?.logout()
     }
     
+    
+    
+
 
     // MARK: - Navigation
 
@@ -101,6 +119,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.identifier == "tweetDetail" {
             let detailTweetController = segue.destinationViewController as!DetailTweetViewController
             detailTweetController.setTweet(tweets![rowSelected])
+            homeTableView.deselectRowAtIndexPath(NSIndexPath(forRow: rowSelected, inSection: 0), animated: false)
+        } else if segue.identifier == "ProfileSegue" {
+            let profileViewContoller = segue.destinationViewController as! ProfilePageViewController
+            profileViewContoller.user = tweets![rowSelected].user
         }
         
         

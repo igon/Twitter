@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if User.currentUser != nil {
             print("current user detected")
-            let vc = storyboard.instantiateViewControllerWithIdentifier("TwitterHomeNavigation") as UIViewController
+            let vc = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as UIViewController
             window?.rootViewController = vc
         }
         
