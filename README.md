@@ -29,3 +29,4 @@ Time spent: `14`
    - [ ] Swipe to delete an account
 
 ![Video Walkthrough](video.gif)
+![Video Walkthrough](video2.gif)
