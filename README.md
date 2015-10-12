@@ -15,7 +15,6 @@ Time spent: `14`
    - [X] Contains a section with the users basic stats: # tweets, # following, # followers
 - [X] Home Timeline
    - [X] Tapping on a user image should bring up that user's profile page
-   - 
 #### Optional
 
 - [ ] Profile Page
